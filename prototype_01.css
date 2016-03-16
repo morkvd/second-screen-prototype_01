@@ -1,0 +1,155 @@
+*, *::after, *::before {
+    box-sizing: border-box;
+}
+body {
+    background: #ddd;
+    font-size: 100%;
+    margin: 0;
+}
+h1 {
+    margin: 0 0 1em 0;
+    font-size: 1em;
+    color: hsl(0, 0%, 100%);
+    text-align: center;
+    font-family: "Trebuchet MS","Arial",sans-serif;
+    padding-bottom: .1em;
+}
+h2 {
+    margin: 0 0 0.4em 0;
+    font-size: 1em;
+    color: hsl(0, 0%, 15%);  
+    font-family: "Trebuchet MS","Arial",sans-serif;
+}
+p {
+    margin: 0 0 0.4em 0;
+    font-size: 1em;
+    color: hsl(0, 0%, 15%); 
+    font-family: "Georgia",serif;
+}
+
+
+
+header {
+    background-color: HSL(22, 100%, 63%);
+    padding: 1em;
+    margin: 0;
+    box-shadow: 0em 0.1em 0.2em hsla(0, 0%, 0%, 0.8);
+    background: url('default-header.png') repeat-x;
+    position: relative;
+}
+.options-block {
+    background-color: hsl(0, 0%, 100%);
+    color: hsl(0, 0%, 15%);
+    width: 50%;
+}
+.options-block input[type=checkbox] {
+    display: none;
+}
+.options-block input[type=checkbox] + label {
+    background-color: hsl(0, 0%, 100%);
+    color: hsl(0, 0%, 15%);
+    padding-left: 1em;
+} 
+.options-block input[type=checkbox]:checked + label {
+    background-color: hsl(0, 0%, 15%);
+    color: hsl(0, 0%, 100%);
+} 
+
+
+#login-buttons {
+    position: absolute;
+    right: 1em;
+    bottom: 1em;
+}
+
+section.admin-panel {
+    margin: 1em 1em 1.3em 1em;
+    background: hsl(0, 0%, 100%);
+    padding: 1em 1.2em;
+    box-shadow: 0em 0.1em 0.2em hsla(0, 0%, 0%, 0.8);
+    border-top: solid hsl(0, 85%, 57%) .3em;
+    border-bottom: solid hsl(0, 85%, 57%) .3em;
+}
+legend {
+    border: none;
+    color: hsl(0, 0%, 15%); 
+    font-family: "Trebuchet MS","Arial",sans-serif;
+    font-weight: bold;
+}
+fieldset {
+    margin: 0;
+    border: none;
+    margin-bottom: 1em;
+    color: hsl(0, 0%, 15%); 
+}
+label {
+    width: 100%;
+    display: block;
+    padding: 0.4em 0;
+    color: hsl(0, 0%, 15%); 
+    font-family: "Georgia",serif;
+}
+input[type="text"], textarea {
+    width: 100%;
+    padding: 0.6em;
+    font-family: "Georgia",serif;
+    font-size: 1em;
+    margin-bottom: 1em;
+}
+button {
+    font-size: 1em;
+    padding: 0.1em 0.6em;
+    font-family: "Georgia",serif;
+}
+
+
+
+.cards {
+    margin: 0 1em 1em;
+}
+.card {
+    background: hsl(0, 0%, 100%);
+    padding: 1em 1.2em 2em 1.2em;
+    margin-top: 1em;
+    box-shadow: 0em 0.1em 0.2em hsla(0, 0%, 0%, 0.8);
+    position: relative;
+}
+.card input[type="checkbox"] {
+    display:none;
+}
+.card input[type="checkbox"] + label {
+    display: inline;
+    color: hsl(0, 0%, 15%);
+    font-size: 2em;
+    padding: 0;
+    position: absolute;
+    top: 0.4em;
+    right: 0.3em;
+    width: 1em;
+}
+.card input[type="checkbox"].checked + label {
+    color: hsl(23, 100%, 45%);
+}
+.card button {
+    border: none;
+    background-color: #fff;
+    font-size: 2em;
+    color: #E33;
+    position: absolute;
+    bottom: 0.2em;
+    right: 0.2em;
+    margin: 0;
+    padding: 0;
+}
+
+
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* IE/Edge */
+  user-select: none;           /* non-prefixed version, currently
+                                  not supported by any browser */
+}

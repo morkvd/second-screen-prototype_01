@@ -1,0 +1,75 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>prototype_01</title>
+</head>
+
+<body>
+    {{> header}}
+    {{#if currentUser}}
+        {{> admin}}
+    {{/if}}
+    <section class="cards">
+        {{#each cards}}
+            {{> card}}
+        {{/each}}
+    </section>
+</body>
+
+<template name="header">
+    <header class="title-bar">
+        <h1>EenVandaag van: {{currentDate}}</h1>
+
+        <div class="options-block">
+
+            <input type="checkbox" checked="{{showFavs}}" class="" id="toggle-favs"/>
+
+            <label class="toggle-favs noselect" for="toggle-favs"><span>&#9733;</span> favorieten
+                
+            </label>            
+        </div>
+
+        {{> loginButtons}}
+
+    </header>
+</template>
+
+<template name="admin">
+    <section class="admin-panel">
+        <form class="new-card">
+            <fieldset>
+                <legend>Kaart type:</legend>
+                <label for="text-card-option">
+                    <input id="text-card-option" type="radio" name="cardTypeOption" value="textCard"> Tekst kaart
+                </label>
+                <label for="graph-card-option">
+                    <input id="graph-card-option" type="radio" name="cardTypeOption" value="graphCard"> Grafiek kaart
+                </label>
+                <label for="poll-card-option">
+                    <input id="poll-card-option" type="radio" name="cardTypeOption" value="pollCard"> Stelling kaart
+                </label>
+            </fieldset>
+
+            <input type="text" name="title" placeholder="Title">
+
+            <textarea name="text" id="" cols="30" rows="10" placeholder="Text"></textarea>
+
+            <button name="submit">Submit</button>
+        </form>
+    </section>
+</template>
+
+<template name="card">
+    <article class="card">
+        <h2>{{title}}</h2>
+        <h2>{{formatDate datePublished}}</h2>
+        <p>{{text}}</p>
+
+        <input type="checkbox" checked="{{checked}}" class="toggle-checked {{#if checked}}checked{{/if}}" id="{{_id}}"/>
+
+        <label for="{{_id}}" class="noselect">&#9733;</label>
+
+        <button class="delete">&times;</button>
+
+    </article>
+</template>
