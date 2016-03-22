@@ -6,6 +6,9 @@
 
 <body>
     {{> header}}
+    
+    {{time}}
+
     {{#if currentUser}}
         {{> admin}}
     {{/if}}
@@ -38,33 +41,53 @@
     <section class="admin-panel">
         <form class="new-card">
             <fieldset>
+                <label for="cardTriggerDate">
+                    Datumtijd format voorbeeld: 2016-06-18T19:30Z
+                </label>
+                <input type="datetime" name="cardTriggerDate" placeholder="[YYYY-MM-DD]T[HH:MM]">
+            </fieldset>
+            <fieldset class="card-type">
                 <legend>Kaart type:</legend>
                 <label for="text-card-option">
                     <input id="text-card-option" type="radio" name="cardTypeOption" value="textCard"> Tekst kaart
-                </label>
-                <label for="graph-card-option">
-                    <input id="graph-card-option" type="radio" name="cardTypeOption" value="graphCard"> Grafiek kaart
                 </label>
                 <label for="poll-card-option">
                     <input id="poll-card-option" type="radio" name="cardTypeOption" value="pollCard"> Stelling kaart
                 </label>
             </fieldset>
 
-            <input type="text" name="title" placeholder="Title">
+            {{#if cardTypeIs 'textCard'}}
+                <input type="text" name="title" placeholder="Title">
 
-            <textarea name="text" id="" cols="30" rows="10" placeholder="Text"></textarea>
+                <textarea name="text" id="" cols="30" rows="10" placeholder="Text"></textarea>
 
-            <button name="submit">Submit</button>
+
+                <button name="submit">Submit</button>
+            {{/if}}
+            {{#if cardTypeIs 'pollCard'}}
+                <input type="text" name="optionOne" placeholder="optie 1">
+
+                <input type="text" name="optionTwo" placeholder="optie 2">
+            
+                <button name="submit">Submit</button>
+            {{/if}}
         </form>
     </section>
 </template>
 
-<template name="card">
-    <article class="card">
-        <h2>{{title}}</h2>
-        <h2>{{formatDate datePublished}}</h2>
-        <p>{{text}}</p>
 
+
+<template name="card">
+    <article class="card {{#if released triggerDate}}revealed{{/if}}"><!-- {{#if released triggerDate}}revealed{{/if}}  -->
+        <h2>{{title}}</h2>
+        <h3>{{formatDate triggerDate}}</h3>
+        
+        {{#if typeIs 'textCard'}}
+            {{#each splitLines text}}
+                <p>{{this}}</p>
+            {{/each}}
+        {{/if}}
+        
         <input type="checkbox" checked="{{checked}}" class="toggle-checked {{#if checked}}checked{{/if}}" id="{{_id}}"/>
 
         <label for="{{_id}}" class="noselect">&#9733;</label>
