@@ -36,3 +36,22 @@ Separatist Convoy Linked to MH17 Buk Transport
 At 10:40am on the morning of 17 July 2014, one of the first mentions of a Buk missile launcher in Donetsk reached the internet. This came in the form of a post on the “Donetsk is Ukraine!” VKontakte (VK) community, warning of the Buk’s arrival from Makeevka and the presence of three civilian vehicles:
 
 “Bad news. Around 9am, a hauler was going along the Makeevka highway from Makeevka in the direction of Donetsk. On the platform was a BukM1-M2? This AAMS proceeded to the intersection with Shakhtostroiteley Boulevard. The system was accompanied by a convoy that was composed of 1 gray Rav4 SUV, a camouflaged UAZ, and a dark blue Hyundai van with tinted windows. As of 9:15am, the vehicle was located at the intersection of Shakhtostroiteley and Ilycha. The militants got out of their cars, blocking 2 of the far left lanes. Obviously, they were waiting for logistical guidance.”
+
+
+
+verslag:
+    onderschrift beelden -> fig nr. , uitleg , bron
+    als dit gebeurt wil de gebruiker dit doen
+
+
+filmpje:
+    call to action: heen en weer
+        overlay op de tv
+        pol resultaten
+    uitleg
+    audio vervangen
+    animatie overlay
+    real life example
+
+zoek uit rendersettings
+hosten node.js dinges

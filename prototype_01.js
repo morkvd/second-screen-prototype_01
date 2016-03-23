@@ -62,7 +62,7 @@ if (Meteor.isClient) {
   Template.body.helpers({
     cards: function () {
       if (Session.get('showFavs')) {
-        return Cards.find({checked: {$ne: false}}, {sort: {datePublished: -1}}).filter;
+        return Cards.find({checked: {$ne: false}}, {sort: {datePublished: -1}});
       } else {
         return Cards.find({}, {sort: {datePublished: -1}});
       }
