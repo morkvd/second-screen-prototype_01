@@ -6,10 +6,12 @@
 
 <body>
     {{> header}}
-    
-    {{time}}
 
     {{#if currentUser}}
+        <section class="clock">
+            <p>current time: {{time}}</p>
+        </section>
+
         {{> admin}}
     {{/if}}
     <section class="cards">
@@ -42,9 +44,10 @@
         <form class="new-card">
             <fieldset>
                 <label for="cardTriggerDate">
-                    Datumtijd format voorbeeld: 2016-06-18T19:30Z
+                    Datumtijd format voorbeeld:<br> 
+                    2016-06-18T19:30:15+01:00
                 </label>
-                <input type="datetime" name="cardTriggerDate" placeholder="[YYYY-MM-DD]T[HH:MM]">
+                <input type="datetime" name="cardTriggerDate" placeholder="[YYYY-MM-DD]T[HH:mm:ss]+01:00" class="timeField">
             </fieldset>
             <fieldset class="card-type">
                 <legend>Kaart type:</legend>
@@ -61,10 +64,11 @@
 
                 <textarea name="text" id="" cols="30" rows="10" placeholder="Text"></textarea>
 
-
                 <button name="submit">Submit</button>
             {{/if}}
             {{#if cardTypeIs 'pollCard'}}
+                <input type="text" name="title" placeholder="Title">
+
                 <input type="text" name="optionOne" placeholder="optie 1">
 
                 <input type="text" name="optionTwo" placeholder="optie 2">
@@ -78,9 +82,9 @@
 
 
 <template name="card">
-    <article class="card {{#if released triggerDate}}revealed{{/if}}"><!-- {{#if released triggerDate}}revealed{{/if}}  -->
-        <h2>{{title}}</h2>
+    <article class="card {{#if currentUser}}transparent{{/if}} {{#if released triggerDate}}revealed{{/if}}"><!-- {{#if released triggerDate}}revealed{{/if}}  -->
         <h3>{{formatDate triggerDate}}</h3>
+        <h2>{{title}}</h2>
         
         {{#if typeIs 'textCard'}}
             {{#each splitLines text}}

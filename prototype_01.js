@@ -2,7 +2,7 @@ Cards = new Mongo.Collection("cards");
 
 if (Meteor.isClient) {
   // uitzending 
-  Session.set('uitzending', moment().format('2016-03-23 20:30:00', 'DD-MM-YYYY HH:mm:ss Z'));
+  Session.set('uitzending', moment().format('2016-03-23 18:15:00', 'DD-MM-YYYY HH:mm:ss Z'));
   Session.set('showFavs', false);
   Session.set('cardType', null);
 
@@ -15,7 +15,7 @@ if (Meteor.isClient) {
   });
 
   Template.registerHelper('formatDate', function(date) {
-    return moment(date).format('DD-MM-YYYY HH:mm:ss Z');
+    return moment(date).format('DD-MM-YYYY HH:mm:ss');
   });
 
   Template.header.helpers({
@@ -38,9 +38,6 @@ if (Meteor.isClient) {
           type          = event.target.cardTypeOption.value,
           triggerDate   = event.target.cardTriggerDate.value,
           datePublished = Session.get('time');
-
-      console.log('input:', moment(triggerDate).unix());
-      console.log('input:', moment(Session.get('time')).unix());
 
       Cards.insert({
         title: title,

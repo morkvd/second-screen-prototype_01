@@ -17,8 +17,14 @@ h1 {
 h2 {
     margin: 0 0 0.4em 0;
     padding-right: 1.7em;
-    font-size: 1em;
+    font-size: 1.2em;
     color: hsl(0, 0%, 15%);  
+    font-family: "Trebuchet MS","Arial",sans-serif;
+}
+h3 {
+    margin: 0 0 0.4em 0;
+    font-size: 0.8em;
+    color: hsl(0, 0%, 15%);
     font-family: "Trebuchet MS","Arial",sans-serif;
 }
 p {
@@ -27,8 +33,6 @@ p {
     color: hsl(0, 0%, 15%); 
     font-family: "Georgia",serif;
 }
-
-
 
 header {
     background-color: HSL(22, 100%, 63%);
@@ -56,11 +60,11 @@ header {
     color: hsl(0, 0%, 100%);
 } 
 
-
 #login-buttons {
     position: absolute;
     right: 1em;
     bottom: 1em;
+    display: none;
 }
 #login-buttons .login-close-text {
     float: right;
@@ -74,6 +78,13 @@ header {
     border-radius: 0;
 }
 
+.clock {
+    margin: 1em 1em 1.3em 1em;
+    background: hsl(0, 0%, 100%);
+    padding: 1em 1.2em;
+    box-shadow: 0em 0.1em 0.2em hsla(0, 0%, 0%, 0.8);
+}
+
 section.admin-panel {
     margin: 1em 1em 1.3em 1em;
     background: hsl(0, 0%, 100%);
@@ -81,6 +92,9 @@ section.admin-panel {
     box-shadow: 0em 0.1em 0.2em hsla(0, 0%, 0%, 0.8);
     border-top: solid hsl(0, 85%, 57%) .3em;
     border-bottom: solid hsl(0, 85%, 57%) .3em;
+}
+.timeField {
+    width: 16em;
 }
 legend {
     border: none;
@@ -114,8 +128,6 @@ button {
     font-family: "Georgia",serif;
 }
 
-
-
 .cards {
     margin: 0 1em 1em;
 }
@@ -128,7 +140,15 @@ button {
     border: 1px solid hsl(0, 0%, 60%);
     display: none;
 }
-.card.revealed {display: block;}
+.card.transparent {
+    display: block;
+    opacity: 0.5;
+}
+.card.revealed,
+.card.transparent.revealed {
+    display: block; 
+    opacity: 1;
+}
 .card input[type="checkbox"] {
     display:none;
 }
@@ -157,8 +177,6 @@ button {
     padding: 0;
 }
 
-
-
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none;   /* Chrome/Safari/Opera */
@@ -167,4 +185,10 @@ button {
   -ms-user-select: none;       /* IE/Edge */
   user-select: none;           /* non-prefixed version, currently
                                   not supported by any browser */
+}
+
+@media all and (min-width: 25em) { 
+    #login-buttons {
+        display: block;
+    }
 }
