@@ -6,12 +6,14 @@ body {
     font-size: 100%;
     margin: 0;
 }
+h1, h2, h3 {
+    font-family: "Trebuchet MS","Arial",sans-serif;
+}
 h1 {
     margin: 0 0 1em 0;
     font-size: 1em;
     color: hsl(0, 0%, 100%);
     text-align: center;
-    font-family: "Trebuchet MS","Arial",sans-serif;
     padding-bottom: .1em;
 }
 h2 {
@@ -19,13 +21,11 @@ h2 {
     padding-right: 1.7em;
     font-size: 1.2em;
     color: hsl(0, 0%, 15%);  
-    font-family: "Trebuchet MS","Arial",sans-serif;
 }
 h3 {
     margin: 0 0 0.4em 0;
     font-size: 0.8em;
     color: hsl(0, 0%, 15%);
-    font-family: "Trebuchet MS","Arial",sans-serif;
 }
 p {
     margin: 0 0 0.4em 0;
@@ -33,15 +33,26 @@ p {
     color: hsl(0, 0%, 15%); 
     font-family: "Georgia",serif;
 }
-
 header {
     background-color: HSL(22, 100%, 63%);
-    padding: 1em;
+    padding: 1em 1em 0 1em;
     margin: 0;
     box-shadow: 0em 0.1em 0.2em hsla(0, 0%, 0%, 0.8);
     background: url('default-header.png') repeat-x;
     position: relative;
 }
+
+.cards-area {
+    max-width: 40em;
+    margin: 0 auto;
+}
+.header-content-area {
+    max-width: 40em;
+    margin: 0 auto;
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
 .options-block {
     background-color: hsl(0, 0%, 100%);
     color: hsl(0, 0%, 15%);
@@ -133,20 +144,38 @@ button {
 }
 .card {
     background: hsl(0, 0%, 100%);
-    padding: 1em 1.2em 2em 1.2em;
+    /* padding: 1em 1.2em 2em 1.2em; */
     margin-top: 1em;
     box-shadow: 0em 0.1em 0.2em hsla(0, 0%, 0%, 0.4);
     position: relative;
     border: 1px solid hsl(0, 0%, 60%);
     display: none;
+
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-content: stretch;
+    align-items: stretch;
 }
+.text-part {
+    padding: 1em 0 2em 1.2em;
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 5em;
+}
+.button-part {
+    padding: .5em 0.4em .5em 0;
+    width: 2.4em;
+    position: relative;
+}
+
 .card.transparent {
-    display: block;
+    display: flex;
     opacity: 0.5;
 }
 .card.revealed,
 .card.transparent.revealed {
-    display: block; 
+    display: flex;
     opacity: 1;
 }
 .card input[type="checkbox"] {
@@ -157,24 +186,23 @@ button {
     color: hsl(0, 0%, 15%);
     font-size: 2em;
     padding: 0;
-    position: absolute;
-    top: 0.4em;
-    right: 0.3em;
     width: 1em;
+    line-height: 1em;
 }
 .card input[type="checkbox"].checked + label {
     color: hsl(23, 100%, 45%);
 }
 .card button {
     border: none;
-    background-color: #fff;
+    background-color: transparent;
     font-size: 2em;
     color: #E33;
-    position: absolute;
-    bottom: 0.2em;
-    right: 0.2em;
     margin: 0;
     padding: 0;
+    position: absolute;
+    bottom: 0;
+    left: -2px;
+    display: none;
 }
 
 .noselect {
@@ -183,8 +211,11 @@ button {
   -khtml-user-select: none;    /* Konqueror */
   -moz-user-select: none;      /* Firefox */
   -ms-user-select: none;       /* IE/Edge */
-  user-select: none;           /* non-prefixed version, currently
-                                  not supported by any browser */
+  user-select: none;
+}
+
+.card button.show {
+    display: inline;
 }
 
 @media all and (min-width: 25em) { 

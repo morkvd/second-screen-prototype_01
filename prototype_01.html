@@ -1,102 +1,90 @@
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>prototype_01</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>prototype_01</title>
 </head>
 
 <body>
-    {{> header}}
-
+  {{> header}}
+  <main class="cards-area">
     {{#if currentUser}}
-        <section class="clock">
-            <p>current time: {{time}}</p>
-        </section>
-
-        {{> admin}}
+      <section class="clock">
+          <p>current time: {{time}}</p>
+      </section>
+      {{> admin}}
     {{/if}}
     <section class="cards">
-        {{#each cards}}
-            {{> card}}
-        {{/each}}
+      {{#each cards}}
+        {{> card}}
+      {{/each}}
     </section>
+  </main>
 </body>
 
 <template name="header">
-    <header class="title-bar">
-        <h1>EenVandaag van: {{currentDate}}</h1>
-
-        <div class="options-block">
-
-            <input type="checkbox" checked="{{showFavs}}" class="" id="toggle-favs"/>
-
-            <label class="toggle-favs noselect" for="toggle-favs"><span>&#9733;</span> favorieten
-                
-            </label>            
-        </div>
-
-        {{> loginButtons}}
-
-    </header>
+  <header class="title-bar">
+    <section class="header-content-area">
+      <h1>EenVandaag van: {{currentDate}}</h1>
+      <div class="options-block">
+        <input type="checkbox" checked="{{showFavs}}" class="" id="toggle-favs"/>
+        <label class="toggle-favs noselect" for="toggle-favs">
+          <span>&#9733;</span> favorieten  
+        </label>            
+      </div>
+      {{> loginButtons}}
+    </section>
+  </header>
 </template>
 
 <template name="admin">
-    <section class="admin-panel">
-        <form class="new-card">
-            <fieldset>
-                <label for="cardTriggerDate">
-                    Datumtijd format voorbeeld:<br> 
-                    2016-06-18T19:30:15+01:00
-                </label>
-                <input type="datetime" name="cardTriggerDate" placeholder="[YYYY-MM-DD]T[HH:mm:ss]+01:00" class="timeField">
-            </fieldset>
-            <fieldset class="card-type">
-                <legend>Kaart type:</legend>
-                <label for="text-card-option">
-                    <input id="text-card-option" type="radio" name="cardTypeOption" value="textCard"> Tekst kaart
-                </label>
-                <label for="poll-card-option">
-                    <input id="poll-card-option" type="radio" name="cardTypeOption" value="pollCard"> Stelling kaart
-                </label>
-            </fieldset>
-
-            {{#if cardTypeIs 'textCard'}}
-                <input type="text" name="title" placeholder="Title">
-
-                <textarea name="text" id="" cols="30" rows="10" placeholder="Text"></textarea>
-
-                <button name="submit">Submit</button>
-            {{/if}}
-            {{#if cardTypeIs 'pollCard'}}
-                <input type="text" name="title" placeholder="Title">
-
-                <input type="text" name="optionOne" placeholder="optie 1">
-
-                <input type="text" name="optionTwo" placeholder="optie 2">
-            
-                <button name="submit">Submit</button>
-            {{/if}}
-        </form>
-    </section>
+  <section class="admin-panel">
+    <form class="new-card">
+      <fieldset>
+        <label for="cardTriggerDate">
+          Datumtijd format voorbeeld:<br> 
+          2016-06-18T19:30:15+01:00
+        </label>
+        <input type="datetime" name="cardTriggerDate" placeholder="[YYYY-MM-DD]T[HH:mm:ss]+01:00" class="timeField">
+      </fieldset>
+      <fieldset class="card-type">
+        <legend>Kaart type:</legend>
+        <label for="text-card-option">
+          <input id="text-card-option" type="radio" name="cardTypeOption" value="textCard"> Tekst kaart
+        </label>
+        <label for="poll-card-option">
+          <input id="poll-card-option" type="radio" name="cardTypeOption" value="pollCard"> Stelling kaart
+        </label>
+      </fieldset>
+      {{#if cardTypeIs 'textCard'}}
+        <input type="text" name="title" placeholder="Title">
+        <textarea name="text" id="" cols="30" rows="10" placeholder="Text"></textarea>
+        <button name="submit">Submit</button>
+      {{/if}}
+      {{#if cardTypeIs 'pollCard'}}
+        <input type="text" name="title" placeholder="Title">
+        <input type="text" name="optionOne" placeholder="optie 1">
+        <input type="text" name="optionTwo" placeholder="optie 2">
+        <button name="submit">Submit</button>
+      {{/if}}
+    </form>
+  </section>
 </template>
 
-
-
 <template name="card">
-    <article class="card {{#if currentUser}}transparent{{/if}} {{#if released triggerDate}}revealed{{/if}}">
-        <h3>{{formatDate triggerDate}}</h3>
-        <h2>{{title}}</h2>
-        
-        {{#if typeIs 'textCard'}}
-            {{#each splitLines text}}
-                <p>{{this}}</p>
-            {{/each}}
-        {{/if}}
-        
-        <input type="checkbox" checked="{{checked}}" class="toggle-checked {{#if checked}}checked{{/if}}" id="{{_id}}"/>
-
-        <label for="{{_id}}" class="noselect">&#9733;</label>
-
-        <button class="delete">&times;</button>
-
-    </article>
+  <article class="card {{#if currentUser}}transparent{{/if}} {{#if released triggerDate}}revealed{{/if}}">
+    <section class="text-part">
+      <h3>{{formatDate triggerDate}}</h3>
+      <h2>{{title}}</h2>
+      {{#if typeIs 'textCard'}}
+        {{#each splitLines text}}
+          <p>{{this}}</p>
+        {{/each}}
+      {{/if}}
+    </section> 
+    <section class="button-part">
+      <input type="checkbox" checked="{{checked}}" class="toggle-checked {{#if checked}}checked{{/if}}" id="{{_id}}"/>
+      <label for="{{_id}}" class="noselect">&#9733;</label>
+      <button class="delete {{#if currentUser}}show{{/if}}">&times;</button>
+    </section>
+  </article>
 </template>
