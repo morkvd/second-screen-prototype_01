@@ -133,6 +133,9 @@ if (Meteor.isClient) {
     // Returns true if the card is released
     released: function (time) {
       return moment(time).isSameOrBefore(Session.get('time'));
+    },
+    percentOf: function (valueOne, valueTwo) {
+      return (valueOne / ((valueOne + valueTwo) / 100)).toFixed(1) + "%";
     }
   });
   Template.card.events({
@@ -179,9 +182,9 @@ Meteor.methods({
     Cards.insert({
       title: title,
       optionOne: optionOne,
-      countOne: 0,
+      countOne: 1,
       optionTwo: optionTwo,
-      countTwo: 0,
+      countTwo: 1,
       datePublished: datePublished, 
       type: 'pollCard', 
       triggerDate: triggerDate,

@@ -86,11 +86,11 @@
       {{#if typeIs 'pollCard'}}
         <section class="poll-area">
           <section class="countOne poll-option">
-            <p class="countOne noselect">{{countOne}}</p>
+            <p class="countOne noselect">{{percentOf countOne countTwo}}</p>
             <button class="countOne votebutton noselect">{{optionOne}}</button>
           </section>
           <section class="countTwo poll-option">
-            <p class="countTwo noselect">{{countTwo}}</p>
+            <p class="countTwo noselect">{{percentOf countTwo countOne}}</p>
             <button class="countTwo votebutton noselect">{{optionTwo}}</button>
           </section>
         </section>

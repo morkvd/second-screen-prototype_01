@@ -55,3 +55,8 @@ filmpje:
 
 zoek uit rendersettings
 hosten node.js dinges
+
+a   b   tot     
+81  95  176     1
+46  53  100%    1.76%  
+    
