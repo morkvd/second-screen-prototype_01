@@ -22,6 +22,9 @@ h2 {
     font-size: 1.2em;
     color: hsl(0, 0%, 15%);  
 }
+h2.pollCard-title {
+    font-size: 1.8em;  
+}
 h3 {
     margin: 0 0 0.4em 0;
     font-size: 0.8em;
@@ -88,7 +91,6 @@ header {
     border: 1px solid hsl(0, 0%, 60%);
     border-radius: 0;
 }
-
 .clock {
     margin: 1em 1em 1.3em 1em;
     background: hsl(0, 0%, 100%);
@@ -144,7 +146,6 @@ button {
 }
 .card {
     background: hsl(0, 0%, 100%);
-    /* padding: 1em 1.2em 2em 1.2em; */
     margin-top: 1em;
     box-shadow: 0em 0.1em 0.2em hsla(0, 0%, 0%, 0.4);
     position: relative;
@@ -205,6 +206,51 @@ button {
     display: none;
 }
 
+.poll-area {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-content: stretch;
+    align-items: stretch;
+}
+.poll-option {
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 3em;
+    text-align: center;
+}
+.poll-option p {
+    font-size: 3.5em;
+    display: inline-block;
+    margin: 0;
+}
+.poll-option:first-child {
+    margin-right: .5em;
+} 
+.poll-option:last-child {
+    margin-left: .5em;
+} 
+.card button.votebutton {
+    display: block;
+    position: static;
+    bottom: unset;
+    left: unset;
+    width: 90%;
+    margin: 5%;
+    font-size: 1.5em;
+    border: solid .1em hsl(32, 100%, 50%);
+    border-radius: 1em;
+    background-color: hsl(32, 100%, 50%);
+    color: #fff;
+    padding: 0.5em;
+}
+.card button.votebutton:focus,
+.card button.votebutton:active,
+.card button.votebutton::-moz-focus-inner {
+    outline: none; 
+    border-color: hsl(32, 100%, 50%);
+}
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none;   /* Chrome/Safari/Opera */

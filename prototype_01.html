@@ -72,14 +72,30 @@
 
 <template name="card">
   <article class="card {{#if currentUser}}transparent{{/if}} {{#if released triggerDate}}revealed{{/if}}">
+    
     <section class="text-part">
       <h3>{{formatDate triggerDate}}</h3>
-      <h2>{{title}}</h2>
+      <h2 class="{{#if typeIs 'pollCard'}}pollCard-title{{/if}}">{{title}}</h2>
+
       {{#if typeIs 'textCard'}}
         {{#each splitLines text}}
           <p>{{this}}</p>
         {{/each}}
       {{/if}}
+
+      {{#if typeIs 'pollCard'}}
+        <section class="poll-area">
+          <section class="countOne poll-option">
+            <p class="countOne noselect">{{countOne}}</p>
+            <button class="countOne votebutton noselect">{{optionOne}}</button>
+          </section>
+          <section class="countTwo poll-option">
+            <p class="countTwo noselect">{{countTwo}}</p>
+            <button class="countTwo votebutton noselect">{{optionTwo}}</button>
+          </section>
+        </section>
+      {{/if}}
+
     </section> 
     <section class="button-part">
       <input type="checkbox" checked="{{checked}}" class="toggle-checked {{#if checked}}checked{{/if}}" id="{{_id}}"/>
