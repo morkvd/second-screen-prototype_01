@@ -50,7 +50,7 @@ p {
 
 .cards-area {
     max-width: 40em;
-    margin: 0 auto;
+    margin: 1em auto;
 }
 .header-content-area {
     max-width: 40em;
@@ -99,7 +99,6 @@ p {
     background: hsl(0, 0%, 100%);
     padding: 1em 1.2em;
     box-shadow: 0em 0.1em 0.2em hsla(0, 0%, 0%, 0.8);
-    border-top: solid hsl(0, 85%, 57%) .3em;
 }
 
 .admin-panel {
@@ -108,6 +107,8 @@ p {
     padding: 1em 1.2em;
     box-shadow: 0em 0.1em 0.2em hsla(0, 0%, 0%, 0.8);
     border-bottom: solid hsl(0, 85%, 57%) .3em;
+    border-top: solid hsl(0, 85%, 57%) .3em;
+    margin-bottom: 1em;
 }
 .timeField {
     width: 16em;
@@ -241,7 +242,8 @@ button {
         text-align: center;
     }
     .poll-option p {
-        font-size: 3.5em;
+        font-size: 2.8em;
+        /*font-size: 3.5em;*/
         display: inline-block;
         margin: 0;
     }
@@ -251,14 +253,14 @@ button {
     .poll-option:last-child {
         margin-left: .5em;
     } 
-.card button.votebutton {
+.card .votebutton {
     display: block;
     position: static;
     bottom: unset;
     left: unset;
     width: 90%;
-    margin: 5%;
-    font-size: 1.5em;
+    margin: 0.7em 5% 0 5%;
+    font-size: 1.3em;
     border: solid .1em hsl(32, 100%, 50%);
     border-radius: 1em;
     background-color: hsl(32, 100%, 50%);
@@ -283,6 +285,14 @@ button {
 @media all and (min-width: 24em) { 
     .cards, .admin-panel, .clock {
         margin: 0 1em 1em;
+    }
+    .poll-option p {
+        font-size: 3.5em;
+        display: inline-block;
+        margin: 0;
+    }
+    .card button.votebutton {
+        font-size: 1.5em;
     }
 }
 @media all and (min-width: 25em) { 

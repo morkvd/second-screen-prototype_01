@@ -1,4 +1,5 @@
 Cards = new Mongo.Collection("cards");
+console.log(Cards.find({}, {sort: {triggerDate: -1}}));
 
 if (Meteor.isServer) {
   Meteor.publish("cards", () => Cards.find());
@@ -49,7 +50,8 @@ if (Meteor.isClient) {
       event.preventDefault();
       var submittedCardType = Session.get('cardType'),
         datePublished       = Session.get('time'),
-        triggerDate         = event.target.cardTriggerDate;
+        triggerDate         = event.target.cardTriggerDate.value;
+      console.log(triggerDate);
     
       if (submittedCardType === 'textCard') {
         var text        = event.target.text.value,

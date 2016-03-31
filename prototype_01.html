@@ -9,7 +9,7 @@
   <main class="cards-area">
     {{#if currentUser}}
       <section class="clock">
-          <p>current time: {{time}}</p>
+          <p>Huidige tijd:<br> {{time}}</p>
       </section>
       {{> admin}}
     {{/if}}
@@ -41,10 +41,10 @@
     <form class="new-card">
       <fieldset>
         <label for="cardTriggerDate">
-          Datumtijd format voorbeeld:<br> 
-          2016-06-18T19:30:15+01:00
+          Datumtijd format voorbeeld:<br>
+          2016-06-18T19:30:15
         </label>
-        <input type="datetime" name="cardTriggerDate" placeholder="[YYYY-MM-DD]T[HH:mm:ss]+01:00" class="timeField">
+        <input type="datetime" name="cardTriggerDate" placeholder="[YYYY-MM-DD]T[HH:mm:ss]" class="timeField">
       </fieldset>
       <fieldset class="card-type">
         <legend>Kaart type:</legend>
