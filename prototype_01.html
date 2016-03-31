@@ -76,7 +76,6 @@
     <header>
       <section class="card-title">
         <h3>{{formatDate triggerDate}}</h3>
-        <h2 class="{{#if typeIs 'pollCard'}}pollCard-title{{/if}}">{{title}}</h2>
       </section>
 
       <section class="card-buttons">
@@ -87,7 +86,7 @@
     </header>
 
     <section class="content-area">
-
+      <h2 class="{{#if typeIs 'pollCard'}}pollCard-title{{/if}}">{{title}}</h2>
       {{#if typeIs 'textCard'}}
         {{#each splitLines text}}
           <p>{{this}}</p>

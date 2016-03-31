@@ -17,17 +17,19 @@ h1 {
     padding-bottom: .1em;
 }
 h2 {
-    margin: 0 0 0.4em 0;
+    padding: .3em 0 .7em 0;
     font-size: 1.2em;
-    color: hsl(0, 0%, 15%);  
+    color: hsl(0, 0%, 15%);
+    margin: 0;
 }
 h2.pollCard-title {
-    font-size: 1.5em;  
+    font-size: 1.4em;  
 }
 h3 {
-    margin: 0 0 0.4em 0;
-    font-size: 0.8em;
+    margin: 0.5em 0;
+    font-size: 1em;
     color: hsl(0, 0%, 15%);
+    font-weight: normal;
 }
 p {
     margin: 0 0 0.4em 0;
@@ -176,7 +178,7 @@ button {
         align-content: flex-start;
         align-items: flex-start;
 
-        padding: 1em 0 1em 1em;
+        padding: 1em 0 0 1em;
     }
         .card-title {
 
@@ -190,8 +192,8 @@ button {
             .card input[type="checkbox"] + label {
                 display: block;
                 color: hsl(0, 0%, 15%);
-                font-size: 2em;
-                padding: 0 .5em;
+                font-size: 1.6em;
+                padding: .1em 0 0.3em 0;
                 line-height: 1em;
                 cursor: pointer;
             }
@@ -219,7 +221,7 @@ button {
             }
 
     .content-area {
-        padding: 1em;
+        padding: 0em 1em 1em 1em;
         flex-grow: 1;
         flex-shrink: 0;
         flex-basis: 5em;
