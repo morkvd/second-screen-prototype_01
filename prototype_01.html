@@ -73,9 +73,20 @@
 <template name="card">
   <article class="card {{#if currentUser}}transparent{{/if}} {{#if released triggerDate}}revealed{{/if}}">
     
-    <section class="text-part">
-      <h3>{{formatDate triggerDate}}</h3>
-      <h2 class="{{#if typeIs 'pollCard'}}pollCard-title{{/if}}">{{title}}</h2>
+    <header>
+      <section class="card-title">
+        <h3>{{formatDate triggerDate}}</h3>
+        <h2 class="{{#if typeIs 'pollCard'}}pollCard-title{{/if}}">{{title}}</h2>
+      </section>
+
+      <section class="card-buttons">
+        <input type="checkbox" checked="{{checked}}" class="toggle-checked {{#if checked}}checked{{/if}}" id="{{_id}}"/>
+        <label for="{{_id}}" class="noselect"><span>&#9733;</span></label>
+        <a href="#" class="delete {{#if currentUser}}show{{/if}}">&times;</a>
+      </section>
+    </header>
+
+    <section class="content-area">
 
       {{#if typeIs 'textCard'}}
         {{#each splitLines text}}
@@ -97,10 +108,5 @@
       {{/if}}
 
     </section> 
-    <section class="button-part">
-      <input type="checkbox" checked="{{checked}}" class="toggle-checked {{#if checked}}checked{{/if}}" id="{{_id}}"/>
-      <label for="{{_id}}" class="noselect">&#9733;</label>
-      <button class="delete {{#if currentUser}}show{{/if}}">&times;</button>
-    </section>
   </article>
 </template>

@@ -128,7 +128,8 @@ if (Meteor.isClient) {
       Meteor.call("setFaved", this._id, ! this.checked);
     },
     // Delete card
-    "click .delete": function () {
+    "click .delete": function (e) {
+      e.preventDefault();
       Meteor.call("deleteCard", this._id);
     },
     // Vote in poll

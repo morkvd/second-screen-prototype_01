@@ -18,12 +18,11 @@ h1 {
 }
 h2 {
     margin: 0 0 0.4em 0;
-    padding-right: 1.7em;
     font-size: 1.2em;
     color: hsl(0, 0%, 15%);  
 }
 h2.pollCard-title {
-    font-size: 1.8em;  
+    font-size: 1.5em;  
 }
 h3 {
     margin: 0 0 0.4em 0;
@@ -36,7 +35,7 @@ p {
     color: hsl(0, 0%, 15%); 
     font-family: "Georgia",serif;
 }
-header {
+.title-bar {
     background-color: HSL(22, 100%, 63%);
     padding: 1em 1em 0 1em;
     margin: 0;
@@ -44,6 +43,8 @@ header {
     background: url('default-header.png') repeat-x;
     position: relative;
 }
+
+
 
 .cards-area {
     max-width: 40em;
@@ -92,18 +93,18 @@ header {
     border-radius: 0;
 }
 .clock {
-    margin: 1em 1em 1.3em 1em;
-    background: hsl(0, 0%, 100%);
-    padding: 1em 1.2em;
-    box-shadow: 0em 0.1em 0.2em hsla(0, 0%, 0%, 0.8);
-}
-
-section.admin-panel {
-    margin: 1em 1em 1.3em 1em;
+    margin: 0.4em;
     background: hsl(0, 0%, 100%);
     padding: 1em 1.2em;
     box-shadow: 0em 0.1em 0.2em hsla(0, 0%, 0%, 0.8);
     border-top: solid hsl(0, 85%, 57%) .3em;
+}
+
+.admin-panel {
+    margin: 0.4em;
+    background: hsl(0, 0%, 100%);
+    padding: 1em 1.2em;
+    box-shadow: 0em 0.1em 0.2em hsla(0, 0%, 0%, 0.8);
     border-bottom: solid hsl(0, 85%, 57%) .3em;
 }
 .timeField {
@@ -142,34 +143,22 @@ button {
 }
 
 .cards {
-    margin: 0 1em 1em;
+    margin: 0.4em;
 }
 .card {
     background: hsl(0, 0%, 100%);
-    margin-top: 1em;
+    margin-top: .4em;
     box-shadow: 0em 0.1em 0.2em hsla(0, 0%, 0%, 0.4);
     position: relative;
     border: 1px solid hsl(0, 0%, 60%);
     display: none;
 
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: nowrap;
     justify-content: center;
     align-content: stretch;
     align-items: stretch;
 }
-.text-part {
-    padding: 1em 0 2em 1.2em;
-    flex-grow: 1;
-    flex-shrink: 0;
-    flex-basis: 5em;
-}
-.button-part {
-    padding: .5em 0.4em .5em 0;
-    width: 2.4em;
-    position: relative;
-}
-
 .card.transparent {
     display: flex;
     opacity: 0.5;
@@ -179,58 +168,87 @@ button {
     display: flex;
     opacity: 1;
 }
-.card input[type="checkbox"] {
-    display:none;
-}
-.card input[type="checkbox"] + label {
-    display: inline;
-    color: hsl(0, 0%, 15%);
-    font-size: 2em;
-    padding: 0;
-    width: 1em;
-    line-height: 1em;
-}
-.card input[type="checkbox"].checked + label {
-    color: hsl(23, 100%, 45%);
-}
-.card button {
-    border: none;
-    background-color: transparent;
-    font-size: 2em;
-    color: #E33;
-    margin: 0;
-    padding: 0;
-    position: absolute;
-    bottom: 0;
-    left: -2px;
-    display: none;
-}
+    .card header {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-content: flex-start;
+        align-items: flex-start;
 
-.poll-area {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-content: stretch;
-    align-items: stretch;
-}
-.poll-option {
-    flex-grow: 1;
-    flex-shrink: 0;
-    flex-basis: 3em;
-    text-align: center;
-}
-.poll-option p {
-    font-size: 3.5em;
-    display: inline-block;
-    margin: 0;
-}
-.poll-option:first-child {
-    margin-right: .5em;
-} 
-.poll-option:last-child {
-    margin-left: .5em;
-} 
+        padding: 1em 0 1em 1em;
+    }
+        .card-title {
+
+        }
+        .card-buttons {
+            display: flex;
+        }
+            .card input[type="checkbox"] {
+                display:none;
+            }
+            .card input[type="checkbox"] + label {
+                display: block;
+                color: hsl(0, 0%, 15%);
+                font-size: 2em;
+                padding: 0 .5em;
+                line-height: 1em;
+                cursor: pointer;
+            }
+            .card input[type="checkbox"] + label p {
+                display: block;
+                margin: 0px;
+                padding: 0px;
+            }
+            .card input[type="checkbox"].checked + label {
+                color: hsl(23, 100%, 45%);
+            }
+            .card .delete {
+                border: none;
+                background-color: transparent;
+                font-size: 2em;
+                color: #E33;
+                margin: 0;
+                padding: 0 .5em;
+                display: none;
+                line-height: 1em;
+                text-decoration: none;
+            } 
+            .card .delete.show {
+                display: inline;    
+            }
+
+    .content-area {
+        padding: 1em;
+        flex-grow: 1;
+        flex-shrink: 0;
+        flex-basis: 5em;
+    }
+    .poll-area {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-content: stretch;
+        align-items: stretch;
+    }
+    .poll-option {
+        flex-grow: 1;
+        flex-shrink: 0;
+        flex-basis: 3em;
+        text-align: center;
+    }
+    .poll-option p {
+        font-size: 3.5em;
+        display: inline-block;
+        margin: 0;
+    }
+    .poll-option:first-child {
+        margin-right: .5em;
+    } 
+    .poll-option:last-child {
+        margin-left: .5em;
+    } 
 .card button.votebutton {
     display: block;
     position: static;
@@ -260,12 +278,18 @@ button {
   user-select: none;
 }
 
-.card button.show {
-    display: inline;
+@media all and (min-width: 24em) { 
+    .cards, .admin-panel, .clock {
+        margin: 0 1em 1em;
+    }
 }
-
 @media all and (min-width: 25em) { 
+    .card {
+        margin-top: 1em;
+        border: 1px solid hsl(0, 0%, 60%);
+    }
     #login-buttons {
         display: block;
     }
 }
+
