@@ -1,12 +1,10 @@
 Cards = new Mongo.Collection("cards");
 
 if (Meteor.isServer) {
-  Meteor.publish("cards", function () {
-    return Cards.find();
-  });
-  
+  Meteor.publish("cards", () => Cards.find());
+
   Meteor.methods({
-    getServerTime: function () {
+    getServerTime: () => {
       var _time = moment().format();
       return _time;
     }
@@ -17,41 +15,37 @@ if (Meteor.isClient) {
   Meteor.subscribe("cards");
 
   // Uitzending 
-  Session.set('uitzending', moment().format('DD-MM-YYYY') + ' 18:15');
-  Session.set('showFavs', false); // -> toggles if favorites are shown
-  Session.set('cardType', null);  // -> temporary stores card type
+  Session.set('uitzending', `${ moment().format('DD-MM-YYYY') } 18:15`);
+
+  // Toggles if favorites are shown
+  Session.set('showFavs', false);
+
+  // Temporary stores selected card type in admin area
+  Session.set('cardType', null);  
 
   // Store the server time in session
-  Meteor.startup(function () {
-    setInterval(function () {
-      Meteor.call("getServerTime", function (error, result) {
-        Session.set("time", result);
-      });
+  Meteor.startup(() => {
+    setInterval(() => {
+      Meteor.call("getServerTime", (error, result) => Session.set("time", result) );
     }, 1000);
   });
 
   // Format date like 13-03-2016 16:34:02
-  Template.registerHelper('formatDate', function(date) {
-    return moment(date).format('DD-MM-YYYY HH:mm:ss');
-  });
+  Template.registerHelper('formatDate', date => moment(date).format('DD-MM-YYYY HH:mm:ss'));
 
   // Get the current day from session
   Template.header.helpers({
-    currentDate: function () {
-      return Session.get('uitzending');
-    }
+    currentDate: () => Session.get('uitzending') 
   });
 
   // Checks if the given cardtype is equal to 
   // the cardtype of the card in which the check is made
   Template.admin.helpers({
-    cardTypeIs: function (cardType) {
-      return Session.get('cardType') === cardType;
-    }
+    cardTypeIs: cardType => Session.get('cardType') === cardType
   });
   Template.admin.events({
     // Submit new card
-    "submit .new-card": function (event) {
+    "submit .new-card": event => {
       event.preventDefault();
       var submittedCardType = Session.get('cardType'),
         datePublished       = Session.get('time'),
@@ -86,7 +80,7 @@ if (Meteor.isClient) {
       }
     },
     // card-type selection
-    "click .card-type": function (event) {
+    "click .card-type": event => {
       event.stopPropagation();
       event.preventDefault();
       event.target.childNodes[1].checked = !event.target.childNodes[1].checked;
@@ -96,7 +90,7 @@ if (Meteor.isClient) {
 
   Template.body.helpers({
     // Gets all cards
-    cards: function () {
+    cards: () => {
       if (Session.get('showFavs')) {
         return Cards.find({checked: {$ne: false}}, {sort: {triggerDate: -1}});
       } else {
@@ -104,17 +98,13 @@ if (Meteor.isClient) {
       }
     },
     // Status of showFavs (boolean)
-    showFavs: function () {
-      return Session.get('showFavs');
-    },
+    showFavs: () => Session.get('showFavs'),
     // Gets curent time stored in session
-    time: function () {
-      return Session.get("time");
-    }
+    time: () => Session.get("time")
   });
   Template.body.events({
     // Toggle favorites
-    "click .toggle-favs": function (event) {
+    "click .toggle-favs": event => {
       Session.set('showFavs', ! Session.get('showFavs'));
       event.target.checked = Session.get('showFavs'); 
     }
@@ -123,20 +113,14 @@ if (Meteor.isClient) {
   Template.card.helpers({
     // Compares type
     typeIs: function (type) {
-      console.log(this.type, type);
       return this.type === type;
     },
     // Splits text into lines on linebreak
-    splitLines: function (text) {
-      return text.split(/\r?\n/);
-    },
+    splitLines: text => text.split(/\r?\n/),
     // Returns true if the card is released
-    released: function (time) {
-      return moment(time).isSameOrBefore(Session.get('time'));
-    },
-    percentOf: function (valueOne, valueTwo) {
-      return (valueOne / ((valueOne + valueTwo) / 100)).toFixed(1) + "%";
-    }
+    released: time => moment(time).isSameOrBefore(Session.get('time')),
+    // Turns raw vote data into percentages
+    percentOf: (valueOne, valueTwo) => `${ (valueOne / ((valueOne + valueTwo) / 100)).toFixed(1) }%`
   });
   Template.card.events({
     // Set favorite
@@ -147,10 +131,12 @@ if (Meteor.isClient) {
     "click .delete": function () {
       Meteor.call("deleteCard", this._id);
     },
+    // Vote in poll
+      // looks at the first class of the html element clicked to 
+      // determine which counter needs to be incremented 
+      // NOTE TO FUTURE SELF: this is horrible and should be improved
     "click .poll-option": function (e) {
       Meteor.call("voteUp", this._id, e.target.classList[0]);
-      console.log(this);
-      console.log(e.target.classList[0]);
     }
   });
 
@@ -161,7 +147,7 @@ if (Meteor.isClient) {
 }
 
 Meteor.methods({
-  addTextCard: function (title, text, datePublished, triggerDate) {
+  addTextCard: (title, text, datePublished, triggerDate) => {
     if (! Meteor.userId()) {
       throw new Meteor.Error("not-authorized");
     }
@@ -175,7 +161,7 @@ Meteor.methods({
       checked: false
     });
   },
-  addPollCard: function (title, optionOne, optionTwo, datePublished, triggerDate) {
+  addPollCard: (title, optionOne, optionTwo, datePublished, triggerDate) => {
     if (! Meteor.userId()) {
       throw new Meteor.Error("not-authorized");
     }
@@ -191,20 +177,20 @@ Meteor.methods({
       checked: false
     });
   },
-  deleteCard: function (cardId) {
+  deleteCard: cardId => {
     if (! Meteor.userId()) {
       throw new Meteor.Error("not-authorized");
     }
     Cards.remove(cardId);
   },
-  setFaved: function (cardId, setChecked) {
+  setFaved: (cardId, setChecked) => {
     Cards.update(cardId, {$set: {checked: setChecked}});
   },
   // casts vote in a poll
-  voteUp: function(cardId, option) {
+  voteUp: (cardId, option) => {
     var action = {};
     action[option] = 1; 
-    // action is equal to {'countOne': 1} or {'countTwo': 1}
+    // action is equal to {'countOne': 1} or {'countTwo': 1} depending on which button is clicked
     Cards.update(cardId, {$inc: action});
   }
 });
