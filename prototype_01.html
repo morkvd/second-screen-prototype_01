@@ -1,7 +1,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>prototype_01</title>
+  <title>Eenvandaag 2e scherm</title>
 </head>
 
 <body>
@@ -71,7 +71,7 @@
 </template>
 
 <template name="card">
-  <article class="card {{#if currentUser}}transparent{{/if}} {{#if released triggerDate}}revealed{{/if}}">
+  <article id="{{_id}}" class="card {{#if currentUser}}transparent{{/if}} {{#if released triggerDate}}revealed{{/if}}">
     
     <header>
       <section class="card-title">
@@ -79,8 +79,8 @@
       </section>
 
       <section class="card-buttons">
-        <input type="checkbox" checked="{{checked}}" class="toggle-checked {{#if checked}}checked{{/if}}" id="{{_id}}"/>
-        <label for="{{_id}}" class="noselect"><span>&#9733;</span></label>
+        <input type="checkbox" checked="{{checked}}" class="toggle-checked {{#if checked}}checked{{/if}}" id="{{_id}}button"/>
+        <label for="{{_id}}button" class="noselect"><span>&#9733;</span></label>
         <a href="#" class="delete {{#if currentUser}}show{{/if}}">&times;</a>
       </section>
     </header>
@@ -96,12 +96,12 @@
       {{#if typeIs 'pollCard'}}
         <section class="poll-area">
           <section class="countOne poll-option">
-            <p class="countOne noselect">{{percentOf countOne countTwo}}</p>
-            <button class="countOne votebutton noselect">{{optionOne}}</button>
+            <p class="noselect">{{percentOf countOne countTwo}}</p>
+            <button class="votebutton noselect">{{optionOne}}</button>
           </section>
           <section class="countTwo poll-option">
-            <p class="countTwo noselect">{{percentOf countTwo countOne}}</p>
-            <button class="countTwo votebutton noselect">{{optionTwo}}</button>
+            <p class="noselect">{{percentOf countTwo countOne}}</p>
+            <button class="votebutton noselect">{{optionTwo}}</button>
           </section>
         </section>
       {{/if}}

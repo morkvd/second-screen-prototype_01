@@ -161,15 +161,26 @@ button {
     justify-content: center;
     align-content: stretch;
     align-items: stretch;
+
+    -webkit-flex-direction: column;
+    -webkit-flex-wrap: nowrap;
+    -webkit-justify-content: center;
+    -webkit-align-content: stretch;
+    -webkit-align-items: stretch;
+
 }
 .card.transparent {
     display: flex;
     opacity: 0.5;
+
+    -webkit-display: flex;
 }
 .card.revealed,
 .card.transparent.revealed {
     display: flex;
     opacity: 1;
+
+    -webkit-display: flex;
 }
     .card header {
         display: flex;
@@ -179,6 +190,13 @@ button {
         align-content: flex-start;
         align-items: flex-start;
 
+        -webkit-display: flex;
+        -webkit-flex-direction: row;
+        -webkit-flex-wrap: nowrap;
+        -webkit-justify-content: space-between;
+        -webkit-align-content: flex-start;
+        -webkit-align-items: flex-start;
+
         padding: 1em 0 0 1em;
     }
         .card-title {
@@ -186,6 +204,8 @@ button {
         }
         .card-buttons {
             display: flex;
+
+            -webkit-display: flex;
         }
             .card input[type="checkbox"] {
                 display:none;
@@ -194,7 +214,7 @@ button {
                 display: block;
                 color: hsl(0, 0%, 15%);
                 font-size: 1.6em;
-                padding: .1em 0 0.3em 0;
+                padding: .1em .5em .3em 0;
                 line-height: 1em;
                 cursor: pointer;
             }
@@ -212,7 +232,7 @@ button {
                 font-size: 2em;
                 color: #E33;
                 margin: 0;
-                padding: 0 .5em;
+                padding: 0 .5em 0 0;
                 display: none;
                 line-height: 1em;
                 text-decoration: none;
@@ -226,6 +246,10 @@ button {
         flex-grow: 1;
         flex-shrink: 0;
         flex-basis: 5em;
+
+        -webkit-flex-grow: 1;
+        -webkit-flex-shrink: 0;
+        -webkit-flex-basis: 5em;
     }
     .poll-area {
         display: flex;
@@ -234,12 +258,23 @@ button {
         justify-content: center;
         align-content: stretch;
         align-items: stretch;
+
+        -webkit-display: flex;
+        -webkit-flex-direction: row;
+        -webkit-flex-wrap: nowrap;
+        -webkit-justify-content: center;
+        -webkit-align-content: stretch;
+        -webkit-align-items: stretch;
     }
     .poll-option {
         flex-grow: 1;
         flex-shrink: 0;
         flex-basis: 3em;
         text-align: center;
+
+        -webkit-flex-grow: 1;
+        -webkit-flex-shrink: 0;
+        -webkit-flex-basis: 3em;
     }
     .poll-option p {
         font-size: 2.8em;

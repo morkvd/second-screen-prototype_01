@@ -72,7 +72,7 @@ if (Meteor.isClient) {
           optionOne     = event.target.optionOne.value,
           optionTwo     = event.target.optionTwo.value;
 
-        Meteor.call("addPollCard", title, optionOne, optionTwo, triggerDate, datePublished)
+        Meteor.call("addPollCard", title, optionOne, optionTwo, datePublished, triggerDate)
         
         // Clear fields
         event.target.title.value = "";
@@ -121,7 +121,7 @@ if (Meteor.isClient) {
     splitLines: text => text.split(/\r?\n/),
     // Returns true if the card is released
     released: time => moment(time).isSameOrBefore(Session.get('time')),
-    // Turns raw vote data into percentages
+    // Turns raw vote counts into percentages; returns percentage of valueOne
     percentOf: (valueOne, valueTwo) => `${ (valueOne / ((valueOne + valueTwo) / 100)).toFixed(1) }%`
   });
   Template.card.events({
@@ -135,11 +135,13 @@ if (Meteor.isClient) {
       Meteor.call("deleteCard", this._id);
     },
     // Vote in poll
-      // looks at the first class of the html element clicked to 
+      // looks at the first class of the .poll-option element clicked to 
       // determine which counter needs to be incremented 
       // NOTE TO FUTURE SELF: this is horrible and should be improved
-    "click .poll-option": function (e) {
-      Meteor.call("voteUp", this._id, e.target.classList[0]);
+    "click .poll-option": function (e) { 
+      console.log(e);
+      console.log($(`#${this._id} > .votebutton` ));
+      Meteor.call("voteUp", this._id, e.currentTarget.classList[0]);
     }
   });
 
