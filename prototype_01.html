@@ -1,16 +1,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Eenvandaag 2e scherm</title>
+  <title>Eenvandaag 2de scherm</title>
 </head>
 
 <body>
   {{> header}}
   <main class="cards-area">
     {{#if currentUser}}
-      <section class="clock">
-          <p>Huidige tijd:<br> {{time}}</p>
-      </section>
       {{> admin}}
     {{/if}}
     <section class="cards">
@@ -38,13 +35,17 @@
 
 <template name="admin">
   <section class="admin-panel">
+    <h2>Admin panel</h2>
     <form class="new-card">
+      <legend>Nieuwe kaart:</legend>
       <fieldset>
+        <p>
+          Huidige tijd: <br> {{formatDate time 'YYYY-MM-DD HH:mm:ss'}}
+        </p>
         <label for="cardTriggerDate">
-          Datumtijd format voorbeeld:<br>
-          2016-06-18T19:30:15
+          Tijd van verschijning kaart:
         </label>
-        <input type="datetime" name="cardTriggerDate" placeholder="[YYYY-MM-DD]T[HH:mm:ss]" class="timeField">
+        <input type="datetime" name="cardTriggerDate" placeholder="bv: 2017-06-05T23:34:12" class="timeField">
       </fieldset>
       <fieldset class="card-type">
         <legend>Kaart type:</legend>
@@ -56,26 +57,36 @@
         </label>
       </fieldset>
       {{#if cardTypeIs 'textCard'}}
-        <input type="text" name="title" placeholder="Title">
-        <textarea name="text" id="" cols="30" rows="10" placeholder="Text"></textarea>
-        <button name="submit">Submit</button>
+        <label>Titel:
+          <input type="text" name="title" placeholder="Title">
+        </label>
+        <label>Tekst:>
+          <textarea name="text" id="" cols="30" rows="10" placeholder="Text"></textarea>
+        </label>
+        <button name="submit">Publiceer</button>
       {{/if}}
       {{#if cardTypeIs 'pollCard'}}
-        <input type="text" name="title" placeholder="Title">
-        <input type="text" name="optionOne" placeholder="optie 1">
-        <input type="text" name="optionTwo" placeholder="optie 2">
-        <button name="submit">Submit</button>
+        <label>Stelling titel:
+          <input type="text" name="title" placeholder="Title">
+        </label>
+        <label>Stelling optie 1:
+          <input type="text" name="optionOne" placeholder="optie 1">
+        </label>
+        <label>Stelling optie 2:
+          <input type="text" name="optionTwo" placeholder="optie 2">
+        </label>
+        <button name="submit">Publiceer</button>
       {{/if}}
     </form>
   </section>
 </template>
 
 <template name="card">
-  <article id="{{_id}}" class="card {{#if currentUser}}transparent{{/if}} {{#if released triggerDate}}revealed{{/if}}">
+  <article id="{{_id}}" class="card {{#if currentUser}}transparent{{/if}} {{#if released triggerDate}}revealed{{/if}} {{type}}">
     
     <header>
       <section class="card-title">
-        <h3>{{formatDate triggerDate}}</h3>
+        <h3>{{formatDate triggerDate 'DD-MM-YYYY HH:mm:ss'}}</h3>
       </section>
 
       <section class="card-buttons">

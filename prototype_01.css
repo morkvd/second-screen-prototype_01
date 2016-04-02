@@ -37,6 +37,7 @@ p {
     color: hsl(0, 0%, 15%); 
     font-family: "Georgia",serif;
 }
+fieldset {margin: 0;padding: 0;}
 .title-bar {
     background-color: HSL(22, 100%, 63%);
     padding: 1em 1em 0 1em;
@@ -45,8 +46,6 @@ p {
     background: url('default-header.png') repeat-x;
     position: relative;
 }
-
-
 
 .cards-area {
     max-width: 40em;
@@ -132,12 +131,15 @@ label {
     color: hsl(0, 0%, 15%); 
     font-family: "Georgia",serif;
 }
-input[type="text"], textarea {
+input[type="text"], textarea, input[type="datetime"] {
     width: 100%;
     padding: 0.6em;
     font-family: "Georgia",serif;
     font-size: 1em;
     margin-bottom: 1em;
+}
+input[type="datetime"] {
+    max-width: 20em; 
 }
 button {
     font-size: 1em;
@@ -167,7 +169,21 @@ button {
     -webkit-justify-content: center;
     -webkit-align-content: stretch;
     -webkit-align-items: stretch;
-
+}
+/*covers*/
+.card.pollCard::after {
+    position: absolute;
+    top: 35%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 65%;
+    content: " ";
+    display: none;
+}
+.card.pollCard.cover::after {
+    display: block;
 }
 .card.transparent {
     display: flex;
@@ -302,6 +318,9 @@ button {
     color: #fff;
     padding: 0.5em;
 }
+.card .votebutton.hide {
+    opacity: .2;
+}
 .card button.votebutton:focus,
 .card button.votebutton:active,
 .card button.votebutton::-moz-focus-inner {
@@ -316,6 +335,7 @@ button {
   -ms-user-select: none;       /* IE/Edge */
   user-select: none;
 }
+
 
 @media all and (min-width: 24em) { 
     .cards, .admin-panel, .clock {

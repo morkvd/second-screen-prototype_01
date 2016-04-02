@@ -1,5 +1,5 @@
 Cards = new Mongo.Collection("cards");
-console.log(Cards.find({}, {sort: {triggerDate: -1}}));
+//console.log(Cards.find({}, {sort: {triggerDate: -1}}));
 
 if (Meteor.isServer) {
   Meteor.publish("cards", () => Cards.find());
@@ -32,7 +32,7 @@ if (Meteor.isClient) {
   });
 
   // Format date like 13-03-2016 16:34:02
-  Template.registerHelper('formatDate', date => moment(date).format('DD-MM-YYYY HH:mm:ss'));
+  Template.registerHelper('formatDate', (date, formatString) => moment(date).format(formatString));
 
   // Get the current day from session
   Template.header.helpers({
@@ -42,7 +42,9 @@ if (Meteor.isClient) {
   // Checks if the given cardtype is equal to 
   // the cardtype of the card in which the check is made
   Template.admin.helpers({
-    cardTypeIs: cardType => Session.get('cardType') === cardType
+    cardTypeIs: cardType => Session.get('cardType') === cardType,
+    // Gets curent time stored in session
+    time: () => Session.get("time")
   });
   Template.admin.events({
     // Submit new card
@@ -51,7 +53,6 @@ if (Meteor.isClient) {
       var submittedCardType = Session.get('cardType'),
         datePublished       = Session.get('time'),
         triggerDate         = event.target.cardTriggerDate.value;
-      console.log(triggerDate);
     
       if (submittedCardType === 'textCard') {
         var text        = event.target.text.value,
@@ -72,7 +73,7 @@ if (Meteor.isClient) {
           optionOne     = event.target.optionOne.value,
           optionTwo     = event.target.optionTwo.value;
 
-        Meteor.call("addPollCard", title, optionOne, optionTwo, datePublished, triggerDate)
+        Meteor.call("addPollCard", title, optionOne, optionTwo, datePublished, triggerDate);
         
         // Clear fields
         event.target.title.value = "";
@@ -100,9 +101,7 @@ if (Meteor.isClient) {
       }
     },
     // Status of showFavs (boolean)
-    showFavs: () => Session.get('showFavs'),
-    // Gets curent time stored in session
-    time: () => Session.get("time")
+    showFavs: () => Session.get('showFavs')
   });
   Template.body.events({
     // Toggle favorites
@@ -138,9 +137,11 @@ if (Meteor.isClient) {
       // looks at the first class of the .poll-option element clicked to 
       // determine which counter needs to be incremented 
       // NOTE TO FUTURE SELF: this is horrible and should be improved
-    "click .poll-option": function (e) { 
-      console.log(e);
-      console.log($(`#${this._id} > .votebutton` ));
+    "click .poll-option": function (e) {
+      if (! Meteor.userId()) {
+        $(`#${this._id} .votebutton`).addClass('hide')
+        $(`#${this._id}`).addClass('cover');
+      }      
       Meteor.call("voteUp", this._id, e.currentTarget.classList[0]);
     }
   });
